@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.city{
+    background: linear-gradient(90deg, #CDE7F6 0%, #F0F9FF 100%);
+}

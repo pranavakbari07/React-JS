@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+ * {
+            scroll-behavior: smooth;
+            font-family: sans-serif;
+        }
+
+        body {
+            background-image: url(https://img.freepik.com/free-photo/grunge-black-concrete-textured-background_53876-124541.jpg?semt=ais_hybrid);
+        }

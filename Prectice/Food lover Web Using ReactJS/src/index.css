@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+}
+.home{
+    width: 100%;
+    height: 740px;
+    background-image: url(main.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+nav{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    /* border: 1px solid red; */
+}
+.nav1{
+    width: 33.3%;
+    height: 80px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    /* margin-right: 10px; */
+    /* border: 1px solid blue; */
+}
+.nav1 .h{
+    color: orange;
+}
+.nav1 h3{
+    color: white;
+    cursor: pointer;
+    margin-left: 50px;
+}
+.nav1 h3:hover{
+    color: orange;
+}
+.nav2{
+    width: 33.3%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid blue; */
+}
+.nav3{
+    width: 33.3%;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    /* border: 1px solid blue; */
+}
+.nav3 h3{
+    color: white;
+    cursor: pointer;
+    margin-right: 50px;
+    font-family: sans-serif;
+}
+.nav3 h3:hover{
+    color: orange;
+}
+.brack{
+    width: 100%;
+    height: 600px;
+    display: flex;
+    /* border: 1px solid red; */
+}
+.img1{
+    width: 50%;
+    height: 600px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    /* border: 1px solid blue; */
+}
+.img1 img{
+    width: 85%;
+}
+.img2{
+    width: 50%;
+    height: 600px;
+    /* border: 1px solid blue; */
+}
+.img2 h1{
+    margin-left: 30px;
+    margin-top: 120px;
+    color: orange;
+    font-size: 4.5rem;
+    font-weight: 400;
+}
+.img2 p{
+    font-weight: 300;
+    color: white;
+    font-size: 28px;
+    margin-left: 35px;
+    margin-top: 20px;
+}
+.img2 button{
+    cursor: pointer;
+    padding: 18px 25px;
+    border: none;
+    margin-top: 20px;
+    margin-left: 35px;
+    font-family: "Exo 2", sans-serif;
+    font-weight: 800;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: orange;
+}
+.img2 button:hover{
+    transition: .5s;
+    background-color: #363232;
+    color: white;
+}

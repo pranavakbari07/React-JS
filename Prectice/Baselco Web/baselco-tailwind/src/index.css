@@ -1,0 +1,40 @@
+@import "tailwindcss";
+*{
+    font-family: sans-serif;
+}
+.bar{
+    scrollbar-width: none; 
+    background-image: url('../public/bag\ \(2\).jpg');
+    background-size: cover;
+    height: 550px;
+    width: 100%;
+}
+.fon{
+    font-family: "Style Script", cursive;
+}
+.bag{
+    background-image: url('/baag.jpg');
+    background-size: cover;
+}
+.black{
+    background-image: url('/black.jpg');
+    background-size: cover;
+}
+.women{
+    background-image: url('/women.jpg');
+    background-size: cover;
+}
+.watch{
+    background-image: url('/watch.jpg');
+    background-size: cover;
+}
+.join{
+    background-image: url('/join.jpg');
+    background-size: cover;
+    height: 441px;
+}
+.basal{
+    background-image: url('Basalimg.jpg');
+    background-size: cover;
+    height: 441px;
+}
