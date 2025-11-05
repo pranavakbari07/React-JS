@@ -1,0 +1,67 @@
+{
+  "users": [
+    {
+      "id": "9244",
+      "name": "jvv",
+      "age": "bhb",
+      "city": "bjk"
+    },
+    {
+      "id": "e01d",
+      "name": "Pranav",
+      "age": "18",
+      "city": "Rajkot"
+    },
+    {
+      "id": "4a8b",
+      "name": "xasx",
+      "age": "aa",
+      "city": "Ahmedabad"
+    },
+    {
+      "id": "5274",
+      "name": "asxas",
+      "age": "xasxasx",
+      "city": "xasxa"
+    },
+    {
+      "id": "d622",
+      "name": "xasxasxsa",
+      "age": "xasasxasx",
+      "city": "axasxasxa"
+    },
+    {
+      "id": "9a17"
+    },
+    {
+      "id": "689b",
+      "firstName": "Pranav",
+      "lastName": "Akbari",
+      "email": "pranavakbari07@gmail.com",
+      "password": "cdscsc",
+      "day": "",
+      "month": "",
+      "year": "",
+      "gender": "Male"
+    },
+    {
+      "id": "bc80",
+      "firstName": "Pranav",
+      "lastName": "Akbari",
+      "email": "pranavakbari3599@gmail.com",
+      "password": "dzcs",
+      "day": "",
+      "month": "",
+      "year": "",
+      "gender": "Male"
+    },
+    {
+      "id": "627a",
+      "firstName": "csc",
+      "lastName": "scsdc",
+      "email": "dscc",
+      "password": "cdsc",
+      "gender": "Male"
+    }
+  ]
+}
