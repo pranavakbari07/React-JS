@@ -1,28 +1,3 @@
 {
-  "users": [
-    {
-      "id": "9244",
-      "name": "jvv",
-      "age": "bhb",
-      "city": "bjk"
-    },
-    {
-      "id": "e01d",
-      "name": "Pranav",
-      "age": "18",
-      "city": "Rajkot"
-    },
-    {
-      "id": "4a8b",
-      "name": "xasx",
-      "age": "aa",
-      "city": "Ahmedabad"
-    },
-    {
-      "id": "5274",
-      "name": "asxas",
-      "age": "xasxasx",
-      "city": "xasxa"
-    }
-  ]
+  "users": []
 }
