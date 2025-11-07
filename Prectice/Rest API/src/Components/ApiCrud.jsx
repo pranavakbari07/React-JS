@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 export default function ApiCrud() {
 
+    
     const [formdata, setFormdata] = useState({})
     const [Record, setRecord] = useState([])
 
@@ -46,7 +47,6 @@ export default function ApiCrud() {
         },[])
     }
 
-
     const handleDelete = async (id)=>{
         await axios.delete(`http://localhost:5000/users/${id}`).then((res)=>{
             let newData = Record.filter((item)=> item.id != id)
@@ -62,14 +62,9 @@ export default function ApiCrud() {
             city : singleData.city
         })
         setEditIndex(id)
-
     }
-        
 
   return (
-
-    
-    
     <div>
       <h1>API CRUD</h1>
 
