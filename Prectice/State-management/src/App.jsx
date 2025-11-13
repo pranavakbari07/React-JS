@@ -2,6 +2,8 @@ import React, { createContext } from 'react'
 import { Provider } from 'react-redux'
 import { store } from './app/Store'
 import Counter from './components/Counter'
+import Crud from './components/Crud'
+import ApiData from './feature/ApiData'
 // import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // import Home from './Home'
 // import About from './components/About'
@@ -22,7 +24,8 @@ export default function App() {
       </BrowserRouter> */}
 
       <Provider store={store}>
-        <Counter/>
+        {/* <Counter/> */}
+        {/* <Crud/> */}
       </Provider>
     </div>
   )
