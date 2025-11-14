@@ -106,7 +106,7 @@ export default function Signup() {
                             </button>
                         </Link>
                     </div>
-                </div>
+                </div>x
             </div>
         </div>
     )

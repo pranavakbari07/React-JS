@@ -30,7 +30,6 @@ export default function FacebookPage() {
             </form>
           </div>
 
-          {/* Center: Nav icons (hidden on small screens) */}
           <nav className="hidden md:flex items-center space-x-1" aria-label="Main navigation">
             {["🏠", "📹", "🏪", "👥", "🎮"].map((icon, idx) => (
               <button
@@ -46,7 +45,6 @@ export default function FacebookPage() {
             ))}
           </nav>
 
-          {/* Right: User actions */}
           <div className="flex items-center space-x-2 shrink-0">
             <button type="button" className="w-8 h-8 md:w-9 md:h-9 bg-gray-200 rounded-full" aria-label="Profile" />
             <button type="button" className="w-8 h-8 md:w-9 md:h-9 bg-[#E4E6EB] rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-300" aria-label="Create">
@@ -63,7 +61,6 @@ export default function FacebookPage() {
         </div>
       </header>
 
-      {/* ========== Main layout ========== */}
       <div className="max-w-7xl mx-auto px-3 md:px-4 py-4 flex gap-3 md:gap-4">
         {/* Left Sidebar */}
         <aside className="w-64 hidden lg:block shrink-0" aria-label="Sidebar">
@@ -90,9 +87,7 @@ export default function FacebookPage() {
           </div>
         </aside>
 
-        {/* Main Feed */}
         <main className="flex-1 min-w-0 max-w-2xl mx-auto" id="main" tabIndex={-1}>
-          {/* Create Post */}
           <section className="bg-white rounded-lg shadow-sm p-4 mb-4">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 bg-gray-300 rounded-full" />
@@ -120,10 +115,8 @@ export default function FacebookPage() {
             </div>
           </section>
 
-          {/* Post Card */}
           <article className="bg-white rounded-lg shadow-sm mb-4">
             <div className="p-4">
-              {/* Header */}
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-gray-300 rounded-full" />
@@ -138,13 +131,10 @@ export default function FacebookPage() {
                 </button>
               </div>
 
-              {/* Content */}
               <p className="mb-3">Enjoying a beautiful day! 🌞</p>
 
-              {/* Image (use a real src in production) */}
               <img src="insta-img.jpg" alt="People enjoying outdoors" className="w-full rounded-lg mb-3 object-cover" loading="lazy" />
 
-              {/* Actions */}
               <div className="flex items-center justify-between border-t border-gray-200 pt-3">
                 <button type="button" className="flex items-center space-x-2 text-gray-600 hover:bg-gray-100 px-4 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200">
                   <span>👍</span>
@@ -163,7 +153,6 @@ export default function FacebookPage() {
           </article>
         </main>
 
-        {/* Right Sidebar */}
         <aside className="w-80 hidden xl:block shrink-0" aria-label="Right sidebar">
           <div className="bg-white rounded-lg shadow-sm p-4 space-y-4">
             <div>
