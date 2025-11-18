@@ -4,21 +4,21 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebaseConfig'
 
 export default function Register() {
-  const [formdata, setFormdata] = useState({})
-  const navigate = useNavigate()
+    const [formdata,setFormdata] = useState({})
+    const navigate = useNavigate()
 
-  const handlechange = (e) => {
-    setFormdata({
-      ...formdata,
-      [e.target.name]: e.target.value
-    })
-  }
+    const handlechange = (e)=>{
+        setFormdata({
+            ...formdata,
+            [e.target.name]:e.target.value
+        })
+    }
 
-  const handleRegister = async () => {
-    await createUserWithEmailAndPassword(auth, formdata.email, formdata.password).then((res) => {
-      navigate('/')
-    })
-  }
+    const handleRegister = async()=>{
+        await createUserWithEmailAndPassword(auth,formdata.email,formdata.password).then((res)=>{
+            navigate('/')
+        })
+    }
 
   return (
     <div>
