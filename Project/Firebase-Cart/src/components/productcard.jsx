@@ -1,14 +1,6 @@
-import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React from "react";
 
 export default function ProductCard({ product }) {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,   
-    });
-  }, []);
-
   return (
     <div className="card1" data-aos="fade-up"> 
       <div className="cardimg">
