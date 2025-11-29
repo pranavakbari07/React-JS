@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -8,17 +9,19 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDkVsQZ0VIAsKOA6511R0t3jSFIo0OABUU",
-  authDomain: "cart-cc607.firebaseapp.com",
-  projectId: "cart-cc607",
-  storageBucket: "cart-cc607.firebasestorage.app",
-  messagingSenderId: "167126455026",
-  appId: "1:167126455026:web:2918b94ec4188d9910f66b",
-  measurementId: "G-4KVXYS0WJ1"
+  apiKey: "AIzaSyA2toF5mUgipEvhWrB6cOMF0uuwaUVdr34",
+  authDomain: "add-to-cart-using-firebase.firebaseapp.com",
+  projectId: "add-to-cart-using-firebase",
+  storageBucket: "add-to-cart-using-firebase.firebasestorage.app",
+  messagingSenderId: "830497574036",
+  appId: "1:830497574036:web:ce8234806753d38520f881",
+  measurementId: "G-7DZJ5CCYH9"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 const auth = getAuth(app);
 const db = getFirestore(app)
 
