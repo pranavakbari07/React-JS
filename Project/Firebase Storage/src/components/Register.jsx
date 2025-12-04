@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, ProviderId, signInWithPopup } from 'firebase/auth'
 import { auth, db } from '../../firebaseConfig'
 import { doc, setDoc } from 'firebase/firestore'
 
 export default function Register() {
-  
+
   const [formdata, setFormdata] = useState({})
   const navigate = useNavigate()
 
@@ -22,6 +22,8 @@ export default function Register() {
       navigate('/login')
     })
   }
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#e7efff] via-[#f5f7ff] to-white flex flex-col items-center justify-center px-4 py-12 space-y-6">
