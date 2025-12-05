@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function Dashboard() {
   const [userId, setUserId] = useState(null)
   const [userData, setUserData] = useState(null)
+  const [authUser, setAuthUser] = useState(null)
   const navigate = useNavigate()
   const [record, setRecord] = useState([])
   const [Task, setTask] = useState("");
@@ -15,8 +16,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) setUserId(user.uid);
-      else navigate("/");
+      if (user) {
+        setUserId(user.uid);
+        setAuthUser(user);
+      } else {
+        navigate("/");
+      }
     });
   }, []);
 
@@ -94,16 +99,16 @@ export default function Dashboard() {
                 facebook
               </div>
             </div>
-            
+
             {/* Search Bar */}
             <div className="flex-1 max-w-md mx-4 hidden md:block">
               <div className="bg-gray-100 rounded-full px-4 py-2.5 flex items-center gap-2 hover:bg-gray-200 transition-all duration-300 focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-200 focus-within:shadow-md">
                 <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <input 
-                  type="text" 
-                  placeholder="Search tasks..." 
+                <input
+                  type="text"
+                  placeholder="Search tasks..."
                   className="bg-transparent outline-none flex-1 text-sm placeholder-gray-500"
                 />
               </div>
@@ -112,17 +117,20 @@ export default function Dashboard() {
             {/* Right Side - User Info */}
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-gray-100 transition-all duration-200 cursor-pointer group">
-                <img 
-                  src={userData?.photo ? userData.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgJ0SYGF5qAueA_nbIYvUB58DCZ2KG-DkYA&s"} 
-                  alt="User Avatar" 
-                  className="w-9 h-9 rounded-full object-cover ring-2 ring-gray-200 group-hover:ring-blue-300 transition-all" 
+                <img
+                  src={userData?.photo ? userData.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgJ0SYGF5qAueA_nbIYvUB58DCZ2KG-DkYA&s"}
+                  alt="User Avatar"
+                  className="w-9 h-9 rounded-full object-cover ring-2 ring-gray-200 group-hover:ring-blue-300 transition-all"
                 />
-                <span className="hidden md:block font-semibold text-sm text-gray-700">{userData?.name || 'User'}</span>
+                <div className="hidden md:block">
+                  <div className="font-semibold text-sm text-gray-700">{userData?.name || authUser?.displayName || 'User'}</div>
+                  <div className="text-xs text-gray-500">{userData?.email || authUser?.email || ''}</div>
+                </div>
               </div>
-              <button 
-                onClick={handleLogout} 
+              <button
+                onClick={handleLogout}
                 className="px-5 py-2 rounded-lg font-semibold text-sm text-white hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 cursor-pointer relative overflow-hidden group"
-                style={{ 
+                style={{
                   backgroundColor: '#1877F2',
                   backgroundImage: 'linear-gradient(135deg, #1877F2 0%, #4267B2 100%)'
                 }}
@@ -147,17 +155,22 @@ export default function Dashboard() {
           <div className="hidden lg:block w-64 flex-shrink-0">
             <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-5 sticky top-24 transform transition-all duration-300 hover:shadow-xl">
               <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
-                <img 
-                  src={userData?.photo ? userData.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgJ0SYGF5qAueA_nbIYvUB58DCZ2KG-DkYA&s"} 
-                  alt="User Avatar" 
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-200" 
+                <img
+                  src={userData?.photo ? userData.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgJ0SYGF5qAueA_nbIYvUB58DCZ2KG-DkYA&s"}
+                  alt="User Avatar"
+                  className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-200"
                 />
-                <span className="font-semibold text-gray-800">{userData?.name || 'User'}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-gray-800 truncate">{userData?.name || authUser?.displayName || 'User'}</div>
+                  <div className="text-xs text-gray-500 truncate mt-0.5">
+                    {userData?.email || authUser?.email || ''}
+                  </div>
+                </div>
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 cursor-pointer transition-all duration-200 group">
                   <svg className="w-6 h-6 transition-all duration-200 group-hover:scale-110" style={{ color: '#1877F2' }} fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                   </svg>
                   <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600">Tasks</span>
                 </div>
@@ -169,80 +182,111 @@ export default function Dashboard() {
           <div className="flex-1 max-w-2xl mx-auto">
             {/* Add Task Card */}
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-6 mb-6 transform transition-all duration-300 hover:shadow-2xl hover:scale-[1.01]">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="relative">
-                  <img 
-                    src={userData?.photo ? userData.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgJ0SYGF5qAueA_nbIYvUB58DCZ2KG-DkYA&s"} 
-                    alt="User Avatar" 
-                    className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-200" 
-                  />
-                  <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-800">{userData?.name || 'User'}</h3>
-                  <p className="text-xs text-gray-500">Create a new task</p>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg shadow-md">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
                   </div>
-                  <input 
-                    type="text" 
-                    value={Task} 
-                    onChange={(e) => setTask(e.target.value)} 
-                    placeholder="What's on your mind?" 
-                    className="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 bg-gray-50 placeholder-gray-400 transition-all duration-300 hover:border-blue-300" 
-                  />
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800">Create New Task</h3>
+                    <p className="text-xs text-gray-500">Add a task to your list</p>
+                  </div>
                 </div>
-                
-                <div className="flex gap-3">
-                  <div className="relative flex-1">
+                {editIndex && (
+                  <button
+                    onClick={() => {
+                      setTask("");
+                      setPriourity("");
+                      setEditIndex(null);
+                    }}
+                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-all"
+                  >
+                    Cancel
+                  </button>
+                )}
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Task Title
+                  </label>
+                  <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                       </svg>
                     </div>
-                    <input 
-                      type="text" 
-                      value={priourity} 
-                      onChange={(e) => setPriourity(e.target.value)} 
-                      placeholder="Priority (High, Medium, Low)"
-                      className="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-lg bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-sm placeholder-gray-400 transition-all duration-300 hover:border-blue-300"
+                    <input
+                      type="text"
+                      value={Task}
+                      onChange={(e) => setTask(e.target.value)}
+                      placeholder="Enter your task here..."
+                      className="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 bg-white placeholder-gray-400 transition-all duration-300 hover:border-blue-300"
                     />
                   </div>
-                  
-                  <button 
-                    onClick={handleTask} 
-                    className="px-8 py-3.5 cursor-pointer rounded-lg text-white font-semibold text-sm hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
-                    style={{ 
-                      backgroundColor: '#1877F2',
-                      backgroundImage: 'linear-gradient(135deg, #1877F2 0%, #4267B2 100%)'
-                    }}
-                  >
-                    <span className="relative z-10 flex items-center gap-2">
-                      {editIndex ? (
-                        <>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          Update
-                        </>
-                      ) : (
-                        <>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                          </svg>
-                          Post
-                        </>
-                      )}
-                    </span>
-                    <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                  </button>
+                </div>
+
+                <div className="flex gap-3">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Priority
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                      <select
+                        value={priourity}
+                        onChange={(e) => setPriourity(e.target.value)}
+                        className="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 bg-white text-gray-700 transition-all duration-300 hover:border-blue-300 appearance-none cursor-pointer"
+                      >
+                        <option value="" hidden>Select Priority</option>
+                        <option value="High">High Priority</option>
+                        <option value="Medium">Medium Priority</option>
+                        <option value="Low">Low Priority</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-end">
+                    <button
+                      onClick={handleTask}
+                      className="px-8 py-3.5 cursor-pointer rounded-lg text-white font-semibold text-base hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group whitespace-nowrap"
+                      style={{
+                        backgroundColor: '#1877F2',
+                        backgroundImage: 'linear-gradient(135deg, #1877F2 0%, #4267B2 100%)'
+                      }}
+                    >
+                      <span className="relative z-10 flex items-center gap-2">
+                        {editIndex ? (
+                          <>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Update Task
+                          </>
+                        ) : (
+                          <>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                            </svg>
+                            Add Task
+                          </>
+                        )}
+                      </span>
+                      <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -262,7 +306,7 @@ export default function Dashboard() {
                   </span>
                 </h2>
               </div>
-              
+
               {record.length === 0 ? (
                 <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-16 text-center transform transition-all duration-300 hover:shadow-2xl">
                   <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 mb-5">
@@ -286,10 +330,10 @@ export default function Dashboard() {
                       <div key={i} className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 p-5 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.01]">
                         <div className="flex items-start gap-4 mb-4">
                           <div className="relative">
-                            <img 
-                              src={userData?.photo ? userData.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgJ0SYGF5qAueA_nbIYvUB58DCZ2KG-DkYA&s"} 
-                              alt="User Avatar" 
-                              className="w-12 h-12 rounded-full object-cover flex-shrink-0 ring-2 ring-gray-200" 
+                            <img
+                              src={userData?.photo ? userData.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgJ0SYGF5qAueA_nbIYvUB58DCZ2KG-DkYA&s"}
+                              alt="User Avatar"
+                              className="w-12 h-12 rounded-full object-cover flex-shrink-0 ring-2 ring-gray-200"
                             />
                             <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
                               <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -298,13 +342,16 @@ export default function Dashboard() {
                             </div>
                           </div>
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <h3 className="font-semibold text-gray-800">{userData?.name || 'User'}</h3>
+                            <div className="flex items-center gap-2 mb-1">
+                              <h3 className="font-semibold text-gray-800">{userData?.name || authUser?.displayName || 'User'}</h3>
                               <span className="text-xs text-gray-400">•</span>
                               <span className="text-xs text-gray-500">now</span>
                             </div>
+                            <p className="text-xs text-gray-500 mb-2">
+                              {userData?.email || authUser?.email || ''}
+                            </p>
                             <p className="text-sm text-gray-700 mb-3 leading-relaxed">{e.Task}</p>
-                            <span 
+                            <span
                               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-md"
                               style={{ backgroundColor: priorityColor }}
                             >
@@ -315,11 +362,11 @@ export default function Dashboard() {
                             </span>
                           </div>
                         </div>
-                        
+
                         {/* Action Buttons */}
                         <div className="flex gap-3 pt-4 border-t border-gray-200">
-                          <button 
-                            onClick={() => handleEdit(e.docId)} 
+                          <button
+                            onClick={() => handleEdit(e.docId)}
                             className="flex-1 px-4 py-2.5 cursor-pointer rounded-lg text-sm font-semibold hover:bg-blue-50 transition-all duration-200 flex items-center justify-center gap-2 transform hover:scale-105 group"
                             style={{ color: '#1877F2' }}
                           >
@@ -328,8 +375,8 @@ export default function Dashboard() {
                             </svg>
                             Edit
                           </button>
-                          <button 
-                            onClick={() => handleDelete(e.docId)} 
+                          <button
+                            onClick={() => handleDelete(e.docId)}
                             className="flex-1 px-4 py-2.5 cursor-pointer rounded-lg text-sm font-semibold hover:bg-red-50 transition-all duration-200 flex items-center justify-center gap-2 transform hover:scale-105 text-red-600 group"
                           >
                             <svg className="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth, db } from '../../firebaseConfig'
+import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
+import { auth, db, provider } from '../../firebaseConfig'
 import { doc, setDoc } from 'firebase/firestore'
 
 export default function Register() {
@@ -16,10 +16,27 @@ export default function Register() {
   }
 
   const handleRegister = async () => {
-    await createUserWithEmailAndPassword(auth, formdata.email, formdata.password).then((res) => {
-      setDoc(doc(db, 'users', res.user.uid), formdata )
+    const res = await createUserWithEmailAndPassword(auth, formdata.email, formdata.password)
+    if (res && res.user && res.user.uid) {
+      await setDoc(doc(db, 'users', res.user.uid), formdata)
       navigate('/')
-    })  
+    } else {
+      alert('Error registering')
+    }
+  }
+
+  const handleSignIn = async () => {
+    const res = await signInWithPopup(auth, provider)
+    if (res && res.user && res.user.uid) {
+      console.log(res);
+      await setDoc(doc(db, 'users', res.user.uid), {
+        name: res.user.displayName,
+        email: res.user.email,
+      }, { merge: true })
+      navigate('/deskboard')
+    } else {
+      alert('Error signing in with Google')
+    }
   }
 
   return (
@@ -30,6 +47,8 @@ export default function Register() {
       <input type="text" name='password' placeholder='Enter your password' onChange={handlechange} /> <br /><br />
       <button onClick={handleRegister}>Register</button><br /><br />
       <Link to="/">Login</Link>
+
+      <button onClick={handleSignIn}>Sign in With Google</button>
     </div>
   )
 }
