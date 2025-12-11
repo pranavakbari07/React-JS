@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Card from "../Components/Card";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
 
